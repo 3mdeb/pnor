@@ -160,7 +160,6 @@ $build_pnor_command .= " --binFile_BOOTKERNEL $bootkernel";
 $build_pnor_command .= " --binFile_NVRAM $scratch_dir/nvram.bin";
 $build_pnor_command .= " --binFile_MVPD $scratch_dir/mvpd_fill.bin.ecc";
 $build_pnor_command .= " --binFile_DJVPD $scratch_dir/djvpd_fill.bin.ecc";
-$build_pnor_command .= " --binFile_CVPD $scratch_dir/cvpd.bin.ecc";
 $build_pnor_command .= " --binFile_ATTR_TMP $scratch_dir/attr_tmp.bin.ecc";
 $build_pnor_command .= " --binFile_OCC $occ_binary_filename.ecc";
 $build_pnor_command .= " --binFile_ATTR_PERM $scratch_dir/attr_perm.bin.ecc";
@@ -176,6 +175,7 @@ if ($release eq "p9"){
     $build_pnor_command .= " --binFile_HDAT $hdat_binary_filename" if -e $hdat_binary_filename;
 }
 if ($release eq "p8"){
+    $build_pnor_command .= " --binFile_CVPD $scratch_dir/cvpd.bin.ecc";
     $build_pnor_command .= " --binFile_SBEC $scratch_dir/$sbec_binary_filename";
     $build_pnor_command .= " --binFile_WINK $scratch_dir/$wink_binary_filename";
 } else {
