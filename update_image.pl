@@ -251,8 +251,6 @@ sub processConvergedSections {
     $sections{BOOTKERNEL}{out}  = "$scratch_dir/$bootkernel_filename";
     $sections{CAPP}{in}         = "$capp_binary_filename";
     $sections{CAPP}{out}        = "$scratch_dir/cappucode.bin.ecc";
-    $sections{CVPD}{in}         = "$hb_binary_dir/cvpd.bin";
-    $sections{CVPD}{out}        = "$scratch_dir/cvpd.bin.ecc";
     $sections{VERSION}{in}      = "$openpower_version_filename";
     $sections{VERSION}{out}     = "$openpower_version_filename";
     $sections{IMA_CATALOG}{in}  = "$ima_catalog_binary_filename";
@@ -307,6 +305,16 @@ sub processConvergedSections {
         print "WARNING: HDAT partition is not found, including blank binary instead\n";
     }
     $sections{HDAT}{out}       = "$scratch_dir/hdat.bin.ecc";
+
+    if(-e "$hb_binary_dir/cvpd.bin")
+    {
+        $sections{CVPD}{in} = "$hb_binary_dir/cvpd.bin";
+    }
+    else
+    {
+        print "WARNING: CVPD partition is not found, including blank binary instead\n";
+    }
+    $sections{CVPD}{out}    = "$scratch_dir/cvpd.bin.ecc";
 
     # Build up the system bin files specification
     my $system_bin_files;
