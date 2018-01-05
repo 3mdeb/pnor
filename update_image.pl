@@ -116,6 +116,7 @@ while (@ARGV > 0){
         shift;
     }
     elsif (/^-capp_binary_filename/i){
+        #This filename is necessary if the file exists, but if it's not given, we add a blank partition
         $capp_binary_filename = $ARGV[1] or die "Bad command line arg given: execting a config type.\n";
         shift;
     }
@@ -282,8 +283,6 @@ sub processConvergedSections {
     $sections{OCC}{out}         = "$occ_binary_filename.ecc";
     $sections{BOOTKERNEL}{in}   = "$binary_dir/$bootkernel_filename";
     $sections{BOOTKERNEL}{out}  = "$scratch_dir/$bootkernel_filename";
-    $sections{CAPP}{in}         = "$capp_binary_filename";
-    $sections{CAPP}{out}        = "$scratch_dir/cappucode.bin.ecc";
     $sections{VERSION}{in}      = "$openpower_version_filename";
     $sections{VERSION}{out}     = "$scratch_dir/openpower_pnor_version.bin";
     $sections{IMA_CATALOG}{in}  = "$ima_catalog_binary_filename";
@@ -344,6 +343,16 @@ sub processConvergedSections {
         print "WARNING: CVPD partition is not found, including blank binary instead\n";
     }
     $sections{CVPD}{out}    = "$scratch_dir/cvpd.bin.ecc";
+
+    if(-e $capp_binary_filename)
+    {
+        $sections{CAPP}{in} = "$capp_binary_filename";
+    }
+    else
+    {
+        print "WARNING: CAPP partition is not found, including blank binary instead\n";
+    }
+    $sections{CAPP}{out}    = "$scratch_dir/cappucode.bin.ecc";
 
     # Build up the system bin files specification
     my $system_bin_files;
