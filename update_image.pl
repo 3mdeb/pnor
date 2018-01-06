@@ -79,6 +79,7 @@ while (@ARGV > 0){
         shift;
     }
     elsif (/^-sbec_binary_filename/i){
+        #This filename is necessary if the file exists, but if it's not given, we add a blank partition
         $sbec_binary_filename = $ARGV[1] or die "Bad command line arg given: expecting a config type.\n";
         shift;
     }
@@ -528,7 +529,10 @@ else
 }
 
 #Stage SBEC image
-run_command("cp $hb_binary_dir/$sbec_binary_filename $scratch_dir/");
+if(-e $memd_binary_filename)
+{
+    run_command("cp $hb_binary_dir/$sbec_binary_filename $scratch_dir/");
+}
 
 #END MAIN
 #-------------------------------------------------------------------------
