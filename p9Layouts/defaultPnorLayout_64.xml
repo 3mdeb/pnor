@@ -367,9 +367,18 @@ Layout Description
         <ecc/>
     </section>
     <section>
+        <description>Boot kernel firmware data (3MB)</description>
+        <eyeCatch>BOOTKERNFW</eyeCatch>
+	<physicalOffset>0x3706000</physicalOffset>
+	<physicalRegionSize>0x300000</physicalRegionSize>
+	<side>A</side>
+	<ecc/>
+	<clearOnEccErr/>
+    </section>
+    <section>
         <description>HDAT binary data (16KB)</description>
         <eyeCatch>HDAT</eyeCatch>
-	<physicalOffset>0x3706000</physicalOffset>
+	<physicalOffset>0x3A06000</physicalOffset>
         <physicalRegionSize>0x8000</physicalRegionSize>
         <side>sideless</side>
         <sha512Version/>

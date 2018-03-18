@@ -359,4 +359,13 @@ Layout Description
         <readOnly/>
         <ecc/>
     </section>
+    <section>
+	<description>Boot kernel firmware data (3MB)</description>
+	<eyeCatch>BOOTKERNFW</eyeCatch>
+	<physicalOffset>0x3706000</physicalOffset>
+	<physicalRegionSize>0x300000</physicalRegionSize>
+	<side>A</side>
+	<ecc/>
+	<clearOnEccErr/>
+    </section>
 </pnor>
