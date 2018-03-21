@@ -364,8 +364,7 @@ Layout Description
 	<eyeCatch>BOOTKERNFW</eyeCatch>
 	<physicalOffset>0x3706000</physicalOffset>
 	<physicalRegionSize>0x300000</physicalRegionSize>
-	<side>A</side>
-	<ecc/>
-	<clearOnEccErr/>
+	<side>sideless</side>
+	<preserved/>
     </section>
 </pnor>
