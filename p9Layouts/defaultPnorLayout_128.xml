@@ -362,7 +362,7 @@ Layout Description
     <section>
 	<description>Boot kernel firmware data (3MB)</description>
 	<eyeCatch>BOOTKERNFW</eyeCatch>
-	<physicalOffset>0x3706000</physicalOffset>
+	<physicalOffset>0x3710000</physicalOffset>
 	<physicalRegionSize>0x300000</physicalRegionSize>
 	<side>sideless</side>
 	<preserved/>
