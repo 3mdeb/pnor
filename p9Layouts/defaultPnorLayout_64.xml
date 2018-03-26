@@ -377,10 +377,10 @@ Layout Description
         <ecc/>
     </section>
     <section>
-        <description>Boot kernel firmware data (3MB)</description>
+        <description>Boot kernel firmware data (6MB)</description>
         <eyeCatch>BOOTKERNFW</eyeCatch>
 	<physicalOffset>0x3710000</physicalOffset>
-	<physicalRegionSize>0x300000</physicalRegionSize>
+	<physicalRegionSize>0x600000</physicalRegionSize>
 	<side>sideless</side>
 	<preserved/>
     </section>
