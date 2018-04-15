@@ -62,7 +62,6 @@ Layout Description
                        but is across reboots. BMC will clear on power off/on
     <clearOnEccErr/>-> Indication that if an ECC error is comsumed on this partition,
                        clear (write 0xFF with good ECC) to the partition to recover
-    <readOnly/>     -> Indicates that the partition will be marked read only.
 </section>
 -->
 
@@ -124,7 +123,6 @@ Layout Description
         <physicalRegionSize>0x48000</physicalRegionSize>
         <side>A</side>
         <ecc/>
-        <preserved/>
         <reprovision/>
         <clearOnEccErr/>
     </section>
@@ -136,7 +134,6 @@ Layout Description
         <physicalRegionSize>0x90000</physicalRegionSize>
         <side>A</side>
         <ecc/>
-        <preserved/>
         <reprovision/>
         <clearOnEccErr/>
     </section>
@@ -148,7 +145,6 @@ Layout Description
         <physicalRegionSize>0x48000</physicalRegionSize>
         <side>A</side>
         <ecc/>
-        <preserved/>
         <reprovision/>
         <clearOnEccErr/>
     </section>
@@ -159,7 +155,6 @@ Layout Description
         <physicalRegionSize>0x100000</physicalRegionSize>
         <side>A</side>
         <sha512Version/>
-        <readOnly/>
         <ecc/>
     </section>
     <section>
@@ -172,19 +167,18 @@ Layout Description
         <ecc/>
     </section>
     <section>
-        <description>Hostboot Extended image (16.67MB w/o ECC)</description>
+        <description>Hostboot Extended image (13MB w/o ECC)</description>
         <eyeCatch>HBI</eyeCatch>
         <physicalOffset>0x425000</physicalOffset>
-        <physicalRegionSize>0x12C0000</physicalRegionSize>
+        <physicalRegionSize>0xEA0000</physicalRegionSize>
         <side>A</side>
         <sha512Version/>
-        <readOnly/>
         <ecc/>
     </section>
     <section>
         <description>SBE-IPL (Staging Area) (520K)</description>
         <eyeCatch>SBE</eyeCatch>
-        <physicalOffset>0x16E5000</physicalOffset>
+        <physicalOffset>0x12C5000</physicalOffset>
         <physicalRegionSize>0xBC000</physicalRegionSize>
         <side>A</side>
         <sha512Version/>
@@ -195,7 +189,7 @@ Layout Description
     <section>
         <description>HCODE Ref Image (1.125MB)</description>
         <eyeCatch>HCODE</eyeCatch>
-        <physicalOffset>0x17A1000</physicalOffset>
+        <physicalOffset>0x1381000</physicalOffset>
         <physicalRegionSize>0x120000</physicalRegionSize>
         <side>A</side>
         <sha512Version/>
@@ -203,10 +197,10 @@ Layout Description
         <ecc/>
     </section>
     <section>
-        <description>Hostboot Runtime Services for Sapphire (6MB)</description>
+        <description>Hostboot Runtime Services for Sapphire (5.5MB)</description>
         <eyeCatch>HBRT</eyeCatch>
-        <physicalOffset>0x18C1000</physicalOffset>
-        <physicalRegionSize>0x600000</physicalRegionSize>
+        <physicalOffset>0x14A1000</physicalOffset>
+        <physicalRegionSize>0x580000</physicalRegionSize>
         <side>A</side>
         <sha512Version/>
         <readOnly/>
@@ -215,17 +209,17 @@ Layout Description
     <section>
         <description>Payload (1MB)</description>
         <eyeCatch>PAYLOAD</eyeCatch>
-        <physicalOffset>0x1EC1000</physicalOffset>
+        <physicalOffset>0x1A21000</physicalOffset>
         <physicalRegionSize>0x100000</physicalRegionSize>
         <side>A</side>
         <sha512Version/>
         <readOnly/>
     </section>
     <section>
-        <description>Bootloader Kernel (15MB)</description>
+        <description>Bootloader Kernel (31MB)</description>
         <eyeCatch>BOOTKERNEL</eyeCatch>
-        <physicalOffset>0x1FC1000</physicalOffset>
-        <physicalRegionSize>0xF00000</physicalRegionSize>
+        <physicalOffset>0x1B21000</physicalOffset>
+        <physicalRegionSize>0x1F00000</physicalRegionSize>
         <side>A</side>
         <sha512Version/>
         <readOnly/>
@@ -233,7 +227,7 @@ Layout Description
     <section>
         <description>OCC Lid (1.125M)</description>
         <eyeCatch>OCC</eyeCatch>
-        <physicalOffset>0x2EC1000</physicalOffset>
+        <physicalOffset>0x3A21000</physicalOffset>
         <physicalRegionSize>0x120000</physicalRegionSize>
         <side>A</side>
         <sha512Version/>
@@ -243,7 +237,7 @@ Layout Description
     <section>
         <description>Checkstop FIR data (12K)</description>
         <eyeCatch>FIRDATA</eyeCatch>
-        <physicalOffset>0x2FE1000</physicalOffset>
+        <physicalOffset>0x3B41000</physicalOffset>
         <physicalRegionSize>0x3000</physicalRegionSize>
         <side>A</side>
         <ecc/>
@@ -253,7 +247,7 @@ Layout Description
     <section>
         <description>CAPP Lid (144K)</description>
         <eyeCatch>CAPP</eyeCatch>
-        <physicalOffset>0x2FE4000</physicalOffset>
+        <physicalOffset>0x3B44000</physicalOffset>
         <physicalRegionSize>0x24000</physicalRegionSize>
         <side>A</side>
         <sha512Version/>
@@ -263,7 +257,7 @@ Layout Description
     <section>
         <description>BMC Inventory (36K)</description>
         <eyeCatch>BMC_INV</eyeCatch>
-        <physicalOffset>0x3008000</physicalOffset>
+        <physicalOffset>0x3B68000</physicalOffset>
         <physicalRegionSize>0x9000</physicalRegionSize>
         <side>sideless</side>
         <reprovision/>
@@ -271,7 +265,7 @@ Layout Description
     <section>
         <description>Hostboot Bootloader (28K)</description>
         <eyeCatch>HBBL</eyeCatch>
-        <physicalOffset>0x3011000</physicalOffset>
+        <physicalOffset>0x3B71000</physicalOffset>
         <!-- Physical Size includes Header rounded to ECC valid size -->
         <!-- Max size of actual HBBL content is 20K and 22.5K with ECC -->
         <physicalRegionSize>0x7000</physicalRegionSize>
@@ -283,7 +277,7 @@ Layout Description
     <section>
         <description>Temporary Attribute Override (32K)</description>
         <eyeCatch>ATTR_TMP</eyeCatch>
-        <physicalOffset>0x3018000</physicalOffset>
+        <physicalOffset>0x3B78000</physicalOffset>
         <physicalRegionSize>0x8000</physicalRegionSize>
         <side>A</side>
         <reprovision/>
@@ -291,7 +285,7 @@ Layout Description
     <section>
         <description>Permanent Attribute Override (32K)</description>
         <eyeCatch>ATTR_PERM</eyeCatch>
-        <physicalOffset>0x3020000</physicalOffset>
+        <physicalOffset>0x3B80000</physicalOffset>
         <physicalRegionSize>0x8000</physicalRegionSize>
         <side>A</side>
         <ecc/>
@@ -301,16 +295,15 @@ Layout Description
     <section>
         <description>PNOR Version (4K)</description>
         <eyeCatch>VERSION</eyeCatch>
-        <physicalOffset>0x3028000</physicalOffset>
-        <physicalRegionSize>0x2000</physicalRegionSize>
+        <physicalOffset>0x3B88000</physicalOffset>
+        <physicalRegionSize>0x1000</physicalRegionSize>
         <side>A</side>
-        <sha512Version/>
         <readOnly/>
     </section>
     <section>
         <description>IMA Catalog (256K)</description>
         <eyeCatch>IMA_CATALOG</eyeCatch>
-        <physicalOffset>0x302A000</physicalOffset>
+        <physicalOffset>0x3B89000</physicalOffset>
         <physicalRegionSize>0x40000</physicalRegionSize>
         <side>A</side>
         <sha512Version/>
@@ -320,7 +313,7 @@ Layout Description
     <section>
         <description>Ref Image Ring Overrides (128K)</description>
         <eyeCatch>RINGOVD</eyeCatch>
-        <physicalOffset>0x306A000</physicalOffset>
+        <physicalOffset>0x3BC9000</physicalOffset>
         <physicalRegionSize>0x20000</physicalRegionSize>
         <side>A</side>
     </section>
@@ -329,7 +322,7 @@ Layout Description
         <!-- We need 266KB per module sort, going to support
              10 sorts by default, plus ECC  -->
         <eyeCatch>WOFDATA</eyeCatch>
-        <physicalOffset>0x308A000</physicalOffset>
+        <physicalOffset>0x3BE9000</physicalOffset>
         <physicalRegionSize>0x300000</physicalRegionSize>
         <side>A</side>
         <sha512Version/>
@@ -339,7 +332,7 @@ Layout Description
     <section>
         <description>Hostboot deconfig area (64KB)</description>
         <eyeCatch>HB_VOLATILE</eyeCatch>
-        <physicalOffset>0x338A000</physicalOffset>
+        <physicalOffset>0x3EE9000</physicalOffset>
         <physicalRegionSize>0x5000</physicalRegionSize>
         <side>A</side>
         <reprovision/>
@@ -350,7 +343,7 @@ Layout Description
     <section>
         <description>Memory config data (28K)</description>
         <eyeCatch>MEMD</eyeCatch>
-        <physicalOffset>0x338F000</physicalOffset>
+        <physicalOffset>0x3EEE000</physicalOffset>
         <physicalRegionSize>0xE000</physicalRegionSize>
         <side>A</side>
         <sha512Version/>
@@ -360,7 +353,7 @@ Layout Description
     <section>
         <description>SecureBoot Key Transition Partition (16K)</description>
         <eyeCatch>SBKT</eyeCatch>
-        <physicalOffset>0x339D000</physicalOffset>
+        <physicalOffset>0x3F02000</physicalOffset>
         <physicalRegionSize>0x4000</physicalRegionSize>
         <side>A</side>
         <sha512Version/>
@@ -368,9 +361,9 @@ Layout Description
         <ecc/>
     </section>
     <section>
-        <description>HDAT binary data (32KB)</description>
+        <description>HDAT binary data (16KB)</description>
         <eyeCatch>HDAT</eyeCatch>
-        <physicalOffset>0x33A1000</physicalOffset>
+        <physicalOffset>0x3F06000</physicalOffset>
         <physicalRegionSize>0x8000</physicalRegionSize>
         <side>sideless</side>
         <sha512Version/>
@@ -378,22 +371,11 @@ Layout Description
         <ecc/>
     </section>
     <section>
-        <description>Ultravisor binary image (1MB)</description>
-        <eyeCatch>UVISOR</eyeCatch>
-        <physicalOffset>0x33A9000</physicalOffset>
-        <physicalRegionSize>0x100000</physicalRegionSize>
+        <description>Boot kernel firmware data (800KB)</description>
+        <eyeCatch>BOOTKERNFW</eyeCatch>
+        <physicalOffset>0x3F10000</physicalOffset>
+        <physicalRegionSize>0xE0000</physicalRegionSize>
         <side>sideless</side>
-        <sha512Version/>
-        <readOnly/>
-    </section>
-    <section>
-        <description>Open CAPI Memory Buffer (OCMB) Firmware (300K)</description>
-        <eyeCatch>OCMBFW</eyeCatch>
-        <physicalOffset>0x34A9000</physicalOffset>
-        <physicalRegionSize>0x4B000</physicalRegionSize>
-        <side>sideless</side>
-        <sha512Version/>
-        <readOnly/>
-        <ecc/>
+        <preserved/>
     </section>
 </pnor>
