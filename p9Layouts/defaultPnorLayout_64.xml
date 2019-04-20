@@ -170,7 +170,7 @@ Layout Description
         <description>Hostboot Extended image (16.625MB w/o ECC)</description>
         <eyeCatch>HBI</eyeCatch>
         <physicalOffset>0x425000</physicalOffset>
-        <physicalRegionSize>0x10A0000</physicalRegionSize>
+        <physicalRegionSize>0x11A0000</physicalRegionSize>
         <side>A</side>
         <sha512Version/>
         <ecc/>
@@ -178,7 +178,7 @@ Layout Description
     <section>
         <description>SBE-IPL (Staging Area) (520K)</description>
         <eyeCatch>SBE</eyeCatch>
-        <physicalOffset>0x14C5000</physicalOffset>
+        <physicalOffset>0x15C5000</physicalOffset>
         <physicalRegionSize>0xBC000</physicalRegionSize>
         <side>A</side>
         <sha512Version/>
@@ -189,7 +189,7 @@ Layout Description
     <section>
         <description>HCODE Ref Image (1.125MB)</description>
         <eyeCatch>HCODE</eyeCatch>
-        <physicalOffset>0x1581000</physicalOffset>
+        <physicalOffset>0x1681000</physicalOffset>
         <physicalRegionSize>0x120000</physicalRegionSize>
         <side>A</side>
         <sha512Version/>
@@ -199,7 +199,7 @@ Layout Description
     <section>
         <description>Hostboot Runtime Services for Sapphire (6MB)</description>
         <eyeCatch>HBRT</eyeCatch>
-        <physicalOffset>0x16A1000</physicalOffset>
+        <physicalOffset>0x17A1000</physicalOffset>
         <physicalRegionSize>0x600000</physicalRegionSize>
         <side>A</side>
         <sha512Version/>
@@ -209,17 +209,17 @@ Layout Description
     <section>
         <description>Payload (1MB)</description>
         <eyeCatch>PAYLOAD</eyeCatch>
-        <physicalOffset>0x1CA1000</physicalOffset>
+        <physicalOffset>0x1DA1000</physicalOffset>
         <physicalRegionSize>0x100000</physicalRegionSize>
         <side>A</side>
         <sha512Version/>
         <readOnly/>
     </section>
     <section>
-        <description>Bootloader Kernel (27.5MB)</description>
+        <description>Bootloader Kernel (26.5MB)</description>
         <eyeCatch>BOOTKERNEL</eyeCatch>
-        <physicalOffset>0x1DA1000</physicalOffset>
-        <physicalRegionSize>0x1B80000</physicalRegionSize>
+        <physicalOffset>0x1EA1000</physicalOffset>
+        <physicalRegionSize>0x1A80000</physicalRegionSize>
         <side>A</side>
         <sha512Version/>
         <readOnly/>
