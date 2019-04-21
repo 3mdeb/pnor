@@ -22,7 +22,6 @@ my $sbe_binary_filename = "";
 my $sbec_binary_filename = "";
 my $wink_binary_filename = "";
 my $occ_binary_filename = "";
-my $capp_binary_filename = "";
 my $ima_catalog_binary_filename = "";
 my $openpower_version_filename = "";
 my $payload = "";
@@ -114,11 +113,6 @@ while (@ARGV > 0){
     }
     elsif (/^-occ_binary_filename/i){
         $occ_binary_filename = $ARGV[1] or die "Bad command line arg given: expecting a config type.\n";
-        shift;
-    }
-    elsif (/^-capp_binary_filename/i){
-        #This filename is necessary if the file exists, but if it's not given, we add a blank partition
-        $capp_binary_filename = $ARGV[1] or die "Bad command line arg given: execting a config type.\n";
         shift;
     }
     elsif (/^-ima_catalog_binary_filename/i){
@@ -345,16 +339,6 @@ sub processConvergedSections {
     }
     $sections{CVPD}{out}    = "$scratch_dir/cvpd.bin.ecc";
 
-    if(-e $capp_binary_filename)
-    {
-        $sections{CAPP}{in} = "$capp_binary_filename";
-    }
-    else
-    {
-        print "WARNING: CAPP partition is not found, including blank binary instead\n";
-    }
-    $sections{CAPP}{out}    = "$scratch_dir/cappucode.bin.ecc";
-
     # Build up the system bin files specification
     my $system_bin_files;
     foreach my $section (keys %sections)
@@ -508,10 +492,6 @@ else
     # Inject ECC into OCC partition binary
     run_command("dd if=$occ_binary_filename of=$scratch_dir/hostboot.temp.bin ibs=1M conv=sync");
     run_command("ecc --inject $scratch_dir/hostboot.temp.bin --output $occ_binary_filename.ecc --p8");
-
-    # Inject ECC into CAPP partition binary
-    run_command("dd if=$capp_binary_filename bs=144K count=1 > $scratch_dir/hostboot.temp.bin");
-    run_command("ecc --inject $scratch_dir/hostboot.temp.bin --output $scratch_dir/cappucode.bin.ecc --p8");
 
     # Stage PAYLOAD partition
     run_command("cp $payload.bin $scratch_dir/$payload_filename");

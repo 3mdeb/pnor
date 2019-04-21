@@ -251,14 +251,13 @@ Layout Description
         <clearOnEccErr/>
     </section>
     <section>
-        <description>CAPP Lid (144K)</description>
-        <eyeCatch>CAPP</eyeCatch>
+        <description>PNOR Version (8K)</description>
+        <eyeCatch>VERSION</eyeCatch>
         <physicalOffset>0x3944000</physicalOffset>
-        <physicalRegionSize>0x24000</physicalRegionSize>
+        <physicalRegionSize>0x2000</physicalRegionSize>
         <side>A</side>
         <sha512Version/>
         <readOnly/>
-        <ecc/>
     </section>
     <section>
         <description>BMC Inventory (36K)</description>
@@ -297,15 +296,6 @@ Layout Description
         <ecc/>
         <reprovision/>
         <clearOnEccErr/>
-    </section>
-    <section>
-        <description>PNOR Version (4K)</description>
-        <eyeCatch>VERSION</eyeCatch>
-        <physicalOffset>0x3988000</physicalOffset>
-        <physicalRegionSize>0x1000</physicalRegionSize>
-        <side>A</side>
-        <sha512Version/>
-        <readOnly/>
     </section>
     <section>
         <description>IMA Catalog (256K)</description>
