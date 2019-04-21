@@ -387,20 +387,10 @@ Layout Description
         <readOnly/>
     </section>
     <section>
-        <description>Open CAPI Memory Buffer (OCMB) Firmware (300K)</description>
-        <eyeCatch>OCMBFW</eyeCatch>
-        <physicalOffset>0x3E10000</physicalOffset>
-        <physicalRegionSize>0x4B000</physicalRegionSize>
-        <side>sideless</side>
-        <sha512Version/>
-        <readOnly/>
-        <ecc/>
-    </section>
-    <section>
         <description>Boot kernel firmware data (1.8MB)</description>
         <eyeCatch>BOOTKERNFW</eyeCatch>
-        <physicalOffset>0x3E5B000</physicalOffset>
-        <physicalRegionSize>0x195000</physicalRegionSize>
+        <physicalOffset>0x3E10000</physicalOffset>
+        <physicalRegionSize>0x1E0000</physicalRegionSize>
         <side>sideless</side>
         <preserved/>
     </section>
