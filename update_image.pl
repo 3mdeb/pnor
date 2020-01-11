@@ -550,7 +550,7 @@ else
 }
 
 #Stage SBEC image
-if(-e $memd_binary_filename)
+if(-e $sbec_binary_filename)
 {
     run_command("cp $hb_binary_dir/$sbec_binary_filename $scratch_dir/");
 }
