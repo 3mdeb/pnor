@@ -153,20 +153,19 @@ Layout Description
         <clearOnEccErr/>
     </section>
     <section>
-        <description>coreboot image (18MB with ECC)</description>
+        <description>coreboot image 16MB (+4K for SB header)</description>
         <eyeCatch>COREBOOT</eyeCatch>
         <physicalOffset>0x205000</physicalOffset>
-        <physicalRegionSize>0x1200000</physicalRegionSize>
+        <physicalRegionSize>0x1001000</physicalRegionSize>
         <side>A</side>
         <sha512Version/>
         <readOnly/>
-        <ecc/>
     </section>
     <section>
         <description>Unused pad partition</description>
         <eyeCatch>UNUSED</eyeCatch>
-        <physicalOffset>0x1405000</physicalOffset>
-        <physicalRegionSize>0x5C0000</physicalRegionSize>
+        <physicalOffset>0x1206000</physicalOffset>
+        <physicalRegionSize>0x7BF000</physicalRegionSize>
         <side>A</side>
         <preserved/>
         <readOnly/>
