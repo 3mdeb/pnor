@@ -67,8 +67,8 @@ while (@ARGV > 0){
         $hb_binary_dir = $ARGV[1] or die "Bad command line arg given: expecting a config type.\n";
         shift;
     }
-    elsif (/^-cb_binary_dir/i){
-        $cb_binary_dir = $ARGV[1] or die "Bad command line arg given: expecting a config type.\n";
+    elsif (/^-cb_image_dir/i){
+        $cb_image_dir = $ARGV[1] or die "Bad command line arg given: expecting a config type.\n";
         shift;
     }
     elsif (/^-hcode_dir/i){
