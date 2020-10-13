@@ -202,19 +202,19 @@ Layout Description
         <ecc/>
     </section>
     <section>
-        <description>Payload (1MB)</description>
+        <description>Payload (2MB)</description>
         <eyeCatch>PAYLOAD</eyeCatch>
         <physicalOffset>0x21A1000</physicalOffset>
-        <physicalRegionSize>0x100000</physicalRegionSize>
+        <physicalRegionSize>0x200000</physicalRegionSize>
         <side>A</side>
         <sha512Version/>
         <readOnly/>
     </section>
     <section>
-        <description>Bootloader Kernel (21.5MB)</description>
+        <description>Bootloader Kernel (20.5MB)</description>
         <eyeCatch>BOOTKERNEL</eyeCatch>
-        <physicalOffset>0x22A1000</physicalOffset>
-        <physicalRegionSize>0x1580000</physicalRegionSize>
+        <physicalOffset>0x23A1000</physicalOffset>
+        <physicalRegionSize>0x1480000</physicalRegionSize>
         <side>A</side>
         <sha512Version/>
         <readOnly/>
