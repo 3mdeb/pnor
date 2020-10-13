@@ -271,9 +271,7 @@ sub processConvergedSections {
     #$sections{HBI}{out}         = "$scratch_dir/hostboot_extended.header.bin.ecc";
     #$sections{HBD}{in}          = "$op_target_dir/$targeting_binary_source";
     #$sections{HBD}{out}         = "$scratch_dir/$targeting_binary_filename";
-    $sections{HBBL}{in}         = "$cb_image_dir/bootblock.signed.ecc";
     $sections{HBBL}{out}        = "$cb_image_dir/bootblock.signed.ecc";
-    $sections{COREBOOT}{in}     = "$cb_image_dir/coreboot.rom.signed";
     $sections{COREBOOT}{out}    = "$cb_image_dir/coreboot.rom.signed";
     $sections{SBE}{in}          = "$sbePreEcc";
     $sections{SBE}{out}         = "$scratch_dir/$sbe_binary_filename";
