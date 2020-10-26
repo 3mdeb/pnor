@@ -157,7 +157,7 @@ my $does_HBD_RW_exist = checkFor_HBD_RW();
 $build_pnor_command .= " --binFile_SBE $scratch_dir/$sbe_binary_filename";
 #$build_pnor_command .= " --binFile_HBB $scratch_dir/hostboot.header.bin.ecc";
 #$build_pnor_command .= " --binFile_HBI $scratch_dir/hostboot_extended.header.bin.ecc";
-$build_pnor_command .= " --binFile_COREBOOT $cb_image_dir/coreboot.rom.signed";
+$build_pnor_command .= " --binFile_COREBOOT $scratch_dir/coreboot.rom.signed";
 $build_pnor_command .= " --binFile_HBRT $scratch_dir/hostboot_runtime.header.bin.ecc";
 $build_pnor_command .= " --binFile_HBEL $scratch_dir/hbel.bin.ecc";
 $build_pnor_command .= " --binFile_GUARD $scratch_dir/guard.bin.ecc";
@@ -186,7 +186,7 @@ if ($release eq "p8"){
 } else {
     $build_pnor_command .= " --binFile_SBKT $scratch_dir/SBKT.bin";
     $build_pnor_command .= " --binFile_HCODE $scratch_dir/$wink_binary_filename";
-    $build_pnor_command .= " --binFile_HBBL $cb_image_dir/bootblock.signed.ecc";
+    $build_pnor_command .= " --binFile_HBBL $scratch_dir/bootblock.bin.ecc";
     $build_pnor_command .= " --binFile_RINGOVD $scratch_dir/ringOvd.bin";
     $build_pnor_command .= " --binFile_HB_VOLATILE $scratch_dir/guard.bin.ecc";
 }
