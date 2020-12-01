@@ -225,9 +225,9 @@ if ($payload ne "")
 
 # Finalize HBBL logical content
 if ($release eq "p9") {
-    run_command("cp $cb_image_dir/bootblock.bin $scratch_dir/");
+    run_command("dd if=$hb_image_dir/img/hostboot_bootloader.bin of=$scratch_dir/hbbl.bin ibs=8 skip=1536 conv=sync");
     # Append Secure Boot cryptographic algorithms code size to bootloader binary
-    run_command("du -b $hb_image_dir/img/hostboot_securerom.bin | cut -f1 | xargs printf \"%016x\" | sed 's/.\\{2\\}/\\\\\\\\x&/g' | xargs echo -n -e >> $scratch_dir/bootblock.bin");
+    run_command("du -b $hb_image_dir/img/hostboot_securerom.bin | cut -f1 | xargs printf \"%016x\" | sed 's/.\\{2\\}/\\\\\\\\x&/g' | xargs echo -n -e >> $scratch_dir/hbbl.bin");
 
     # Append Secure Boot cryptographic algorithms code to bootloader binary
     # Result:
@@ -235,7 +235,7 @@ if ($release eq "p9") {
     #    [padding to 8 byte alignment, 0-7 bytes (if needed)]
     #    [Secure Boot cryptographic algorithms code size, 8 bytes]
     #    [Secure Boot cryptographic algorithms code binary]
-    run_command("cat $hb_image_dir/img/hostboot_securerom.bin >> $scratch_dir/bootblock.bin");
+    run_command("cat $hb_image_dir/img/hostboot_securerom.bin >> $scratch_dir/hbbl.bin");
 }
 
 # SBE image prep
@@ -259,16 +259,16 @@ sub processConvergedSections {
 
     # Source and destination file for each supported section
     my %sections=();
-    #$sections{HBBL}{in}         = "$scratch_dir/hbbl.bin";
-    #$sections{HBBL}{out}        = "$scratch_dir/hbbl.bin.ecc";
+    $sections{HBBL}{in}         = "$scratch_dir/hbbl.bin";
+    $sections{HBBL}{out}        = "$scratch_dir/hbbl.bin.ecc";
     #$sections{HBB}{in}          = "$hb_image_dir/img/hostboot.bin";
     #$sections{HBB}{out}         = "$scratch_dir/hostboot.header.bin.ecc";
     #$sections{HBI}{in}          = "$hb_image_dir/img/hostboot_extended.bin";
     #$sections{HBI}{out}         = "$scratch_dir/hostboot_extended.header.bin.ecc";
     #$sections{HBD}{in}          = "$op_target_dir/$targeting_binary_source";
     #$sections{HBD}{out}         = "$scratch_dir/$targeting_binary_filename";
-    $sections{HBBL}{in}         = "$scratch_dir/bootblock.bin";
-    $sections{HBBL}{out}        = "$scratch_dir/bootblock.bin.ecc";
+    $sections{HBB}{in}          = "$cb_image_dir/bootblock.bin";
+    $sections{HBB}{out}         = "$scratch_dir/bootblock.header.bin.ecc";
     $sections{COREBOOT}{in}     = "$cb_image_dir/coreboot.rom";
     $sections{COREBOOT}{out}    = "$scratch_dir/coreboot.rom.signed";
     $sections{SBE}{in}          = "$sbePreEcc";
@@ -466,20 +466,13 @@ else
 
     # Add SBE/normal headers and inject ECC into HBB (hostboot base) partition binary
     run_command("echo \"00000000001800000000000008000000000000000007EF80\" | xxd -r -ps - $scratch_dir/sbe.header");
-    run_command("env echo -en VERSION\\\\0 > $scratch_dir/hostboot.sha.bin");
-    run_command("sha512sum $hb_image_dir/img/hostboot.bin | awk \'{print \$1}\' | xxd -pr -r >> $scratch_dir/hostboot.sha.bin");
-    run_command("dd if=$scratch_dir/hostboot.sha.bin of=$scratch_dir/secureboot.header ibs=4k conv=sync");
-    run_command("cat $scratch_dir/sbe.header $scratch_dir/secureboot.header $hb_image_dir/img/hostboot.bin > $scratch_dir/hostboot.stage.bin");
-    run_command("dd if=$scratch_dir/hostboot.stage.bin of=$scratch_dir/hostboot.header.bin ibs=512k conv=sync");
-    run_command("ecc --inject $hb_image_dir/img/hostboot.bin --output $scratch_dir/hostboot.bin.ecc --p8");
-    run_command("ecc --inject $scratch_dir/hostboot.header.bin --output $scratch_dir/hostboot.header.bin.ecc --p8");
-
-    # Add SBE/normal headers into coreboot binary
-    run_command("echo \"00000000001800000000000008000000000000000007EF80\" | xxd -r -ps - $scratch_dir/sbe.header");
-    run_command("env echo -en VERSION\\\\0 > $scratch_dir/coreboot.sha.bin");
-    run_command("sha512sum $cb_image_dir/coreboot.rom | awk \'{print \$1}\' | xxd -pr -r >> $scratch_dir/coreboot.sha.bin");
-    run_command("dd if=$scratch_dir/coreboot.sha.bin of=$scratch_dir/secureboot.header ibs=4k conv=sync");
-    run_command("cat $scratch_dir/sbe.header $scratch_dir/secureboot.header $cb_image_dir/coreboot.rom > $scratch_dir/coreboot.rom.signed");
+    run_command("env echo -en VERSION\\\\0 > $scratch_dir/bootblock.sha.bin");
+    run_command("sha512sum $cb_image_dir/bootblock.bin | awk \'{print \$1}\' | xxd -pr -r >> $scratch_dir/bootblock.sha.bin");
+    run_command("dd if=$scratch_dir/bootblock.sha.bin of=$scratch_dir/secureboot.header ibs=4k conv=sync");
+    run_command("cat $scratch_dir/sbe.header $scratch_dir/secureboot.header $cb_image_dir/bootblock.bin > $scratch_dir/bootblock.stage.bin");
+    run_command("dd if=$scratch_dir/bootblock.stage.bin of=$scratch_dir/bootblock.header.bin ibs=512k conv=sync");
+    run_command("ecc --inject $cb_image_dir/bootblock.bin --output $scratch_dir/bootblock.bin.ecc --p8");
+    run_command("ecc --inject $scratch_dir/bootblock.header.bin --output $scratch_dir/bootblock.header.bin.ecc --p8");
 
     # Inject ECC into HBI (hostboot extended) output binary
     run_command("dd if=$hb_image_dir/img/hostboot_extended.bin of=$scratch_dir/hostboot_extended.bin.pad ibs=4k count=1280 conv=sync");
