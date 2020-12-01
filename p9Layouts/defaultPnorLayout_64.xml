@@ -160,6 +160,7 @@ Layout Description
         <side>A</side>
         <sha512Version/>
         <readOnly/>
+    </section>
     <section>
         <description>coreboot image 16MB (+4K for SB header)</description>
         <eyeCatch>COREBOOT</eyeCatch>
