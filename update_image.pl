@@ -225,11 +225,7 @@ if ($payload ne "")
 
 # Finalize HBBL logical content
 if ($release eq "p9") {
-    # Strip first 12k (reserved for exception vectors) off the bootloader binary
-    # Note: ibs=8 conv=sync to ensure bootloader binary ends at an 8-byte
-    #     boundary to align the Secure Boot cryptographic algorithms code size
-    run_command("dd if=$cb_image_dir/bootblock.bin of=$scratch_dir/bootblock.bin ibs=8 skip=1536 conv=sync");
-
+    run_command("cp $cb_image_dir/bootblock.bin $scratch_dir/");
     # Append Secure Boot cryptographic algorithms code size to bootloader binary
     run_command("du -b $hb_image_dir/img/hostboot_securerom.bin | cut -f1 | xargs printf \"%016x\" | sed 's/.\\{2\\}/\\\\\\\\x&/g' | xargs echo -n -e >> $scratch_dir/bootblock.bin");
 
@@ -271,9 +267,9 @@ sub processConvergedSections {
     #$sections{HBI}{out}         = "$scratch_dir/hostboot_extended.header.bin.ecc";
     #$sections{HBD}{in}          = "$op_target_dir/$targeting_binary_source";
     #$sections{HBD}{out}         = "$scratch_dir/$targeting_binary_filename";
-    $sections{HBBL}{in}         = "$cb_image_dir/bootblock.bin";
-    $sections{COREBOOT}{in}     = "$cb_image_dir/coreboot.rom";
+    $sections{HBBL}{in}         = "$scratch_dir/bootblock.bin";
     $sections{HBBL}{out}        = "$scratch_dir/bootblock.bin.ecc";
+    $sections{COREBOOT}{in}     = "$cb_image_dir/coreboot.rom";
     $sections{COREBOOT}{out}    = "$scratch_dir/coreboot.rom.signed";
     $sections{SBE}{in}          = "$sbePreEcc";
     $sections{SBE}{out}         = "$scratch_dir/$sbe_binary_filename";
