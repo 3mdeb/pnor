@@ -153,9 +153,17 @@ Layout Description
         <clearOnEccErr/>
     </section>
     <section>
+        <description>Hostboot Base (1M)</description>
+        <eyeCatch>HBB</eyeCatch>
+        <physicalOffset>0x205000</physicalOffset>
+        <physicalRegionSize>0x100000</physicalRegionSize>
+        <side>A</side>
+        <sha512Version/>
+        <readOnly/>
+    <section>
         <description>coreboot image 16MB (+4K for SB header)</description>
         <eyeCatch>COREBOOT</eyeCatch>
-        <physicalOffset>0x205000</physicalOffset>
+        <physicalOffset>0x305000</physicalOffset>
         <physicalRegionSize>0x1001000</physicalRegionSize>
         <side>A</side>
         <sha512Version/>
@@ -164,8 +172,8 @@ Layout Description
     <section>
         <description>Unused pad partition</description>
         <eyeCatch>UNUSED</eyeCatch>
-        <physicalOffset>0x1206000</physicalOffset>
-        <physicalRegionSize>0x7BF000</physicalRegionSize>
+        <physicalOffset>0x1306000</physicalOffset>
+        <physicalRegionSize>0x6BF000</physicalRegionSize>
         <side>A</side>
         <preserved/>
         <readOnly/>
