@@ -12,6 +12,7 @@ my $pnor_data_dir = "";
 my $pnor_filename = "";
 my $payload = "";
 my $bootkernel = "";
+my $cb_image_dir = "";
 my $hb_image_dir = "";
 my $xml_layout_file = "";
 my $targeting_binary_filename = "";
@@ -53,6 +54,10 @@ while (@ARGV > 0){
     }
     elsif (/^-pnor_filename/i){
         $pnor_filename = $ARGV[1] or die "Bad command line arg given: expecting a pnor filename.\n";
+        shift;
+    }
+    elsif (/^-cb_image_dir/i){
+        $cb_image_dir = $ARGV[1] or die "Bad command line arg given: expecting an hb image dir path.\n";
         shift;
     }
     elsif (/^-hb_image_dir/i){
@@ -139,19 +144,20 @@ $build_pnor_command .= " --pnorOutBin $pnor_filename --pnorLayout $xml_layout_fi
 
 # Process HBD section and possibly HBD_RW section
 my $does_HBD_RW_exist = checkFor_HBD_RW();
-if ($does_HBD_RW_exist eq 0)
-{
-    $build_pnor_command .= " --binFile_HBD $scratch_dir/$targeting_binary_filename";
-}
-else
-{
-    $build_pnor_command .= " --binFile_HBD $scratch_dir/$targeting_RO_binary_filename";
-    $build_pnor_command .= " --binFile_HBD_RW $scratch_dir/$targeting_RW_binary_filename";
-}
+#if ($does_HBD_RW_exist eq 0)
+#{
+#    $build_pnor_command .= " --binFile_HBD $scratch_dir/$targeting_binary_filename";
+#}
+#else
+#{
+#   $build_pnor_command .= " --binFile_HBD $scratch_dir/$targeting_RO_binary_filename";
+#    $build_pnor_command .= " --binFile_HBD_RW $scratch_dir/$targeting_RW_binary_filename";
+#}
 
 $build_pnor_command .= " --binFile_SBE $scratch_dir/$sbe_binary_filename";
-$build_pnor_command .= " --binFile_HBB $scratch_dir/hostboot.header.bin.ecc";
-$build_pnor_command .= " --binFile_HBI $scratch_dir/hostboot_extended.header.bin.ecc";
+$build_pnor_command .= " --binFile_HBB $scratch_dir/bootblock.header.bin.ecc";
+#$build_pnor_command .= " --binFile_HBI $scratch_dir/hostboot_extended.header.bin.ecc";
+$build_pnor_command .= " --binFile_COREBOOT $scratch_dir/coreboot.rom.signed";
 $build_pnor_command .= " --binFile_HBRT $scratch_dir/hostboot_runtime.header.bin.ecc";
 $build_pnor_command .= " --binFile_HBEL $scratch_dir/hbel.bin.ecc";
 $build_pnor_command .= " --binFile_GUARD $scratch_dir/guard.bin.ecc";

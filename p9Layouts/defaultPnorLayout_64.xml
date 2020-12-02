@@ -163,23 +163,22 @@ Layout Description
         <ecc/>
     </section>
     <section>
-        <description>Hostboot Data (1.125M)</description>
-        <eyeCatch>HBD</eyeCatch>
+        <description>coreboot image 16MB (+4K for SB header)</description>
+        <eyeCatch>COREBOOT</eyeCatch>
         <physicalOffset>0x305000</physicalOffset>
-        <physicalRegionSize>0x120000</physicalRegionSize>
-        <side>A</side>
-        <sha512Version/>
-        <ecc/>
-    </section>
-    <section>
-        <description>Hostboot Extended image (21.625MB w/o ECC)</description>
-        <eyeCatch>HBI</eyeCatch>
-        <physicalOffset>0x425000</physicalOffset>
-        <physicalRegionSize>0x15A0000</physicalRegionSize>
+        <physicalRegionSize>0x1001000</physicalRegionSize>
         <side>A</side>
         <sha512Version/>
         <readOnly/>
-        <ecc/>
+    </section>
+    <section>
+        <description>Unused pad partition</description>
+        <eyeCatch>UNUSED</eyeCatch>
+        <physicalOffset>0x1306000</physicalOffset>
+        <physicalRegionSize>0x6BF000</physicalRegionSize>
+        <side>A</side>
+        <preserved/>
+        <readOnly/>
     </section>
     <section>
         <description>SBE-IPL (Staging Area) (520K)</description>
@@ -213,19 +212,19 @@ Layout Description
         <ecc/>
     </section>
     <section>
-        <description>Payload (1MB)</description>
+        <description>Payload (2MB)</description>
         <eyeCatch>PAYLOAD</eyeCatch>
         <physicalOffset>0x21A1000</physicalOffset>
-        <physicalRegionSize>0x100000</physicalRegionSize>
+        <physicalRegionSize>0x200000</physicalRegionSize>
         <side>A</side>
         <sha512Version/>
         <readOnly/>
     </section>
     <section>
-        <description>Bootloader Kernel (21.5MB)</description>
+        <description>Bootloader Kernel (20.5MB)</description>
         <eyeCatch>BOOTKERNEL</eyeCatch>
-        <physicalOffset>0x22A1000</physicalOffset>
-        <physicalRegionSize>0x1580000</physicalRegionSize>
+        <physicalOffset>0x23A1000</physicalOffset>
+        <physicalRegionSize>0x1480000</physicalRegionSize>
         <side>A</side>
         <sha512Version/>
         <readOnly/>
